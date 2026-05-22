@@ -1,0 +1,21 @@
+Feature: Login
+
+  Scenario: Login successfully with valid account
+    Given the user is on the login page
+    When the user enters username "admin" and password "123456"
+    Then the login result should be "Login successful"
+
+  Scenario: Login fails with wrong password
+    Given the user is on the login page
+    When the user enters username "admin" and password "wrong"
+    Then the login result should be "Invalid username or password"
+
+  Scenario: Login fails with empty username
+    Given the user is on the login page
+    When the user enters username "" and password "123456"
+    Then the login result should be "Username is required"
+
+  Scenario: Login fails with empty password
+    Given the user is on the login page
+    When the user enters username "admin" and password ""
+    Then the login result should be "Password is required"

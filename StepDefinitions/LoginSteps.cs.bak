@@ -1,0 +1,33 @@
+using System;
+using NUnit.Framework;
+using SpecFlowLoginDemo.Services;
+using TechTalk.SpecFlow;
+
+namespace SpecFlowLoginDemo.StepDefinitions
+{
+    [Binding]
+    public class LoginSteps
+    {
+        private readonly LoginService _loginService = new LoginService();
+        private LoginResult? _result;
+
+        [Given(@"the user is on the login page")]
+        public void GivenTheUserIsOnTheLoginPage()
+        {
+            Console.WriteLine("User is on the login page");
+        }
+
+        [When(@"the user enters username ""(.*)"" and password ""(.*)""")]
+        public void WhenTheUserEntersUsernameAndPassword(string username, string password)
+        {
+            _result = _loginService.Login(username, password);
+        }
+
+        [Then(@"the login result should be ""(.*)""")]
+        public void ThenTheLoginResultShouldBe(string expectedMessage)
+        {
+            Assert.That(_result, Is.Not.Null);
+            Assert.That(_result!.Message, Is.EqualTo(expectedMessage));
+        }
+    }
+}

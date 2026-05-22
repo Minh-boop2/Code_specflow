@@ -1,0 +1,37 @@
+namespace SpecFlowLoginDemo.Services
+{
+    public class LoginResult
+    {
+        public bool Success { get; set; }
+        public string Message { get; set; }
+
+        public LoginResult(bool success, string message)
+        {
+            Success = success;
+            Message = message;
+        }
+    }
+
+    public class LoginService
+    {
+        public LoginResult Login(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return new LoginResult(false, "Username is required");
+            }
+
+            if (string.IsNullOrEmpty(password))
+            {
+                return new LoginResult(false, "Password is required");
+            }
+
+            if (username == "admin" && password == "123456")
+            {
+                return new LoginResult(true, "Login successful");
+            }
+
+            return new LoginResult(false, "Invalid username or password");
+        }
+    }
+}
